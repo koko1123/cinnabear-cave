@@ -1,13 +1,14 @@
 from contextlib import asynccontextmanager
 from uuid import UUID
 import logging
+import hashlib
+import time
 
+import httpx
 from fastapi import FastAPI, Depends, HTTPException, Header
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
-from google.oauth2 import id_token
-from google.auth.transport import requests as google_requests
 
 from src.db import get_db, init_db, settings
 from src.models import User, Puzzle, UserPuzzleProgress
@@ -40,6 +41,44 @@ app.add_middleware(
 )
 
 
+# Google tokeninfo endpoint for fast token verification
+GOOGLE_TOKENINFO_URL = "https://www.googleapis.com/oauth2/v3/tokeninfo"
+
+# Cache verified tokens (token_hash -> (google_id, email, expiry))
+_token_cache: dict[str, tuple[str, str, float]] = {}
+
+
+async def _verify_google_token(token: str) -> dict | None:
+    """Verify Google ID token using tokeninfo endpoint."""
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            resp = await client.get(
+                GOOGLE_TOKENINFO_URL,
+                params={"id_token": token}
+            )
+            if resp.status_code != 200:
+                logger.debug(f"Token verification failed: {resp.status_code}")
+                return None
+
+            data = resp.json()
+
+            # Verify audience matches our client ID
+            if data.get("aud") != settings.google_client_id:
+                logger.debug(f"Token audience mismatch: {data.get('aud')}")
+                return None
+
+            return {
+                "sub": data["sub"],  # Google user ID
+                "email": data["email"],
+            }
+    except httpx.TimeoutException:
+        logger.warning("Token verification timed out")
+        return None
+    except Exception as e:
+        logger.debug(f"Token verification error: {e}")
+        return None
+
+
 # Dependency to get current user from Google OAuth token
 async def get_current_user(
     authorization: str | None = Header(None),
@@ -50,18 +89,35 @@ async def get_current_user(
 
     token = authorization.removeprefix("Bearer ")
 
-    try:
-        # Verify Google ID token
-        idinfo = id_token.verify_oauth2_token(
-            token,
-            google_requests.Request(),
-            settings.google_client_id
-        )
-        google_id = idinfo["sub"]
-        email = idinfo["email"]
-    except Exception as e:
-        logger.debug(f"Token verification failed: {e}")
+    # Check cache first
+    token_hash = hashlib.sha256(token.encode()).hexdigest()[:16]
+    if token_hash in _token_cache:
+        google_id, email, expiry = _token_cache[token_hash]
+        if time.time() < expiry:
+            # Cache hit - find user
+            result = await db.execute(select(User).where(User.google_id == google_id))
+            user = result.scalar_one_or_none()
+            if user:
+                return user
+            # User not found but token valid - create user
+            user = User(google_id=google_id, email=email)
+            db.add(user)
+            await db.commit()
+            await db.refresh(user)
+            return user
+        else:
+            del _token_cache[token_hash]
+
+    # Verify with Google tokeninfo endpoint
+    idinfo = await _verify_google_token(token)
+    if not idinfo:
         return None
+
+    google_id = idinfo["sub"]
+    email = idinfo["email"]
+
+    # Cache for 55 min
+    _token_cache[token_hash] = (google_id, email, time.time() + 3300)
 
     # Find user by google_id
     result = await db.execute(select(User).where(User.google_id == google_id))
