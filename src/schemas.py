@@ -1,17 +1,6 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel
 from datetime import datetime
 from uuid import UUID
-
-
-# Auth
-class IdentifyRequest(BaseModel):
-    email: EmailStr
-
-
-class UserResponse(BaseModel):
-    id: UUID
-    email: str
-    created_at: datetime
 
 
 # Puzzles

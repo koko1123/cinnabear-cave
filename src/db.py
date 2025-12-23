@@ -6,10 +6,11 @@ from functools import lru_cache
 
 class Settings(BaseSettings):
     database_url: str = "postgresql+asyncpg://localhost/crossword"
-    cors_origins: list[str] = ["http://localhost:3000"]
+    google_client_id: str = ""  # Required for Google OAuth token verification
 
     class Config:
         env_file = ".env.local"
+        extra = "ignore"
 
 
 @lru_cache

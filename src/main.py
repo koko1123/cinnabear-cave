@@ -6,12 +6,12 @@ from fastapi import FastAPI, Depends, HTTPException, Header
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
+from google.oauth2 import id_token
+from google.auth.transport import requests as google_requests
 
 from src.db import get_db, init_db, settings
 from src.models import User, Puzzle, UserPuzzleProgress
 from src.schemas import (
-    IdentifyRequest,
-    UserResponse,
     PuzzleResponse,
     ProgressUpdateRequest,
     ProgressResponse,
@@ -33,31 +33,54 @@ app = FastAPI(title="Crossword API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 
-# Dependency to get current user from header
+# Dependency to get current user from Google OAuth token
 async def get_current_user(
-    x_user_id: str | None = Header(None),
+    authorization: str | None = Header(None),
     db: AsyncSession = Depends(get_db),
 ) -> User | None:
-    if not x_user_id:
+    if not authorization or not authorization.startswith("Bearer "):
         return None
+
+    token = authorization.removeprefix("Bearer ")
+
     try:
-        user_id = UUID(x_user_id)
-    except ValueError:
+        # Verify Google ID token
+        idinfo = id_token.verify_oauth2_token(
+            token,
+            google_requests.Request(),
+            settings.google_client_id
+        )
+        google_id = idinfo["sub"]
+        email = idinfo["email"]
+    except Exception as e:
+        logger.debug(f"Token verification failed: {e}")
         return None
-    result = await db.execute(select(User).where(User.id == user_id))
-    return result.scalar_one_or_none()
+
+    # Find user by google_id
+    result = await db.execute(select(User).where(User.google_id == google_id))
+    user = result.scalar_one_or_none()
+
+    # Auto-create user on first valid token
+    if not user:
+        user = User(google_id=google_id, email=email)
+        db.add(user)
+        await db.commit()
+        await db.refresh(user)
+        logger.info(f"Created new user: {email} ({google_id})")
+
+    return user
 
 
 def require_user(user: User | None = Depends(get_current_user)) -> User:
     if not user:
-        raise HTTPException(status_code=401, detail="X-User-Id header required")
+        raise HTTPException(status_code=401, detail="Valid Authorization header required")
     return user
 
 
@@ -65,22 +88,6 @@ def require_user(user: User | None = Depends(get_current_user)) -> User:
 @app.get("/health")
 async def health():
     return {"status": "ok"}
-
-
-# Auth
-@app.post("/auth/identify", response_model=UserResponse)
-async def identify(request: IdentifyRequest, db: AsyncSession = Depends(get_db)):
-    """Identify user by email. Creates user if not exists."""
-    result = await db.execute(select(User).where(User.email == request.email))
-    user = result.scalar_one_or_none()
-
-    if not user:
-        user = User(email=request.email)
-        db.add(user)
-        await db.commit()
-        await db.refresh(user)
-
-    return UserResponse(id=user.id, email=user.email, created_at=user.created_at)
 
 
 # Puzzles
