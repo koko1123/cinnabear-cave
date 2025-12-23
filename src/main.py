@@ -1,9 +1,10 @@
 from contextlib import asynccontextmanager
 from uuid import UUID
+import logging
 
 from fastapi import FastAPI, Depends, HTTPException, Header
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy import select
+from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.db import get_db, init_db, settings
@@ -16,6 +17,10 @@ from src.schemas import (
     ProgressResponse,
     ProgressHistoryItem,
 )
+from src.crosshare import fetch_puzzle_list, fetch_puzzle
+from src.converters import crosshare_to_capi
+
+logger = logging.getLogger(__name__)
 
 
 @asynccontextmanager
@@ -84,7 +89,11 @@ async def get_next_puzzle(
     user: User = Depends(require_user),
     db: AsyncSession = Depends(get_db),
 ):
-    """Get the next unplayed puzzle for the user."""
+    """Get the next unplayed puzzle for the user.
+
+    First checks for existing unplayed puzzles in the database.
+    If none found, fetches a new puzzle from Crosshare.org.
+    """
     # Get puzzle IDs user has already started
     played_subq = select(UserPuzzleProgress.puzzle_id).where(
         UserPuzzleProgress.user_id == user.id
@@ -98,6 +107,10 @@ async def get_next_puzzle(
         .limit(1)
     )
     puzzle = result.scalar_one_or_none()
+
+    # If no unplayed puzzles in DB, fetch from Crosshare
+    if not puzzle:
+        puzzle = await _fetch_new_puzzle_from_crosshare(db)
 
     if not puzzle:
         raise HTTPException(status_code=404, detail="No more puzzles available")
@@ -114,6 +127,59 @@ async def get_next_puzzle(
         data=puzzle.data,
         progress={},
     )
+
+
+async def _fetch_new_puzzle_from_crosshare(db: AsyncSession) -> Puzzle | None:
+    """Fetch a new puzzle from Crosshare that we don't already have."""
+    try:
+        # Get list of puzzles from Crosshare
+        crosshare_puzzles = await fetch_puzzle_list()
+
+        for ch_puzzle_meta in crosshare_puzzles:
+            ch_id = ch_puzzle_meta.get("id")
+            if not ch_id:
+                continue
+
+            # Check if we already have this puzzle
+            existing = await db.execute(
+                select(Puzzle).where(Puzzle.crosshare_id == ch_id)
+            )
+            if existing.scalar_one_or_none():
+                continue
+
+            # Fetch full puzzle data
+            ch_puzzle = await fetch_puzzle(ch_id)
+
+            # Convert to CAPI format
+            capi_data = crosshare_to_capi(ch_puzzle)
+
+            # Get next puzzle number
+            max_num_result = await db.execute(select(func.max(Puzzle.puzzle_number)))
+            max_num = max_num_result.scalar() or 0
+            next_num = max_num + 1
+
+            # Update the puzzle data with the new number
+            capi_data["number"] = next_num
+
+            # Create and save puzzle
+            new_puzzle = Puzzle(
+                puzzle_number=next_num,
+                name=capi_data["name"],
+                data=capi_data,
+                crosshare_id=ch_id,
+            )
+            db.add(new_puzzle)
+            await db.commit()
+            await db.refresh(new_puzzle)
+
+            logger.info(f"Fetched new puzzle from Crosshare: {new_puzzle.name} (#{next_num})")
+            return new_puzzle
+
+    except Exception as e:
+        logger.error(f"Error fetching puzzle from Crosshare: {e}")
+        return None
+
+    return None
 
 
 @app.get("/puzzles/{puzzle_id}", response_model=PuzzleResponse)

@@ -24,6 +24,7 @@ class Puzzle(Base):
     puzzle_number: Mapped[int] = mapped_column(Integer, unique=True, nullable=False, index=True)
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     data: Mapped[dict] = mapped_column(JSONB, nullable=False)  # Full CAPICrossword object
+    crosshare_id: Mapped[str | None] = mapped_column(String(50), unique=True, nullable=True, index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
     user_progress: Mapped[list["UserPuzzleProgress"]] = relationship(back_populates="puzzle")
