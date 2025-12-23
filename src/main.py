@@ -17,7 +17,7 @@ from src.schemas import (
     ProgressResponse,
     ProgressHistoryItem,
 )
-from src.crosshare import fetch_puzzle_list, fetch_puzzle
+from src.crosshare import fetch_puzzle_list, fetch_puzzle, is_valid_puzzle_size
 from src.converters import crosshare_to_capi
 
 logger = logging.getLogger(__name__)
@@ -130,50 +130,62 @@ async def get_next_puzzle(
 
 
 async def _fetch_new_puzzle_from_crosshare(db: AsyncSession) -> Puzzle | None:
-    """Fetch a new puzzle from Crosshare that we don't already have."""
+    """Fetch a new featured puzzle from Crosshare that we don't already have.
+
+    Only fetches puzzles with 20 < clue_count < 25.
+    """
     try:
-        # Get list of puzzles from Crosshare
-        crosshare_puzzles = await fetch_puzzle_list()
+        # Try multiple pages of featured puzzles
+        for page in range(1, 10):  # Check up to 10 pages
+            crosshare_puzzles = await fetch_puzzle_list(page=page)
 
-        for ch_puzzle_meta in crosshare_puzzles:
-            ch_id = ch_puzzle_meta.get("id")
-            if not ch_id:
-                continue
+            if not crosshare_puzzles:
+                break  # No more pages
 
-            # Check if we already have this puzzle
-            existing = await db.execute(
-                select(Puzzle).where(Puzzle.crosshare_id == ch_id)
-            )
-            if existing.scalar_one_or_none():
-                continue
+            for ch_puzzle_meta in crosshare_puzzles:
+                ch_id = ch_puzzle_meta.get("id")
+                if not ch_id:
+                    continue
 
-            # Fetch full puzzle data
-            ch_puzzle = await fetch_puzzle(ch_id)
+                # Check if we already have this puzzle
+                existing = await db.execute(
+                    select(Puzzle).where(Puzzle.crosshare_id == ch_id)
+                )
+                if existing.scalar_one_or_none():
+                    continue
 
-            # Convert to CAPI format
-            capi_data = crosshare_to_capi(ch_puzzle)
+                # Fetch full puzzle data
+                ch_puzzle = await fetch_puzzle(ch_id)
 
-            # Get next puzzle number
-            max_num_result = await db.execute(select(func.max(Puzzle.puzzle_number)))
-            max_num = max_num_result.scalar() or 0
-            next_num = max_num + 1
+                # Check clue count filter (20 < clues < 25)
+                if not is_valid_puzzle_size(ch_puzzle):
+                    logger.debug(f"Skipping puzzle {ch_id}: clue count not in range 20-25")
+                    continue
 
-            # Update the puzzle data with the new number
-            capi_data["number"] = next_num
+                # Convert to CAPI format
+                capi_data = crosshare_to_capi(ch_puzzle)
 
-            # Create and save puzzle
-            new_puzzle = Puzzle(
-                puzzle_number=next_num,
-                name=capi_data["name"],
-                data=capi_data,
-                crosshare_id=ch_id,
-            )
-            db.add(new_puzzle)
-            await db.commit()
-            await db.refresh(new_puzzle)
+                # Get next puzzle number
+                max_num_result = await db.execute(select(func.max(Puzzle.puzzle_number)))
+                max_num = max_num_result.scalar() or 0
+                next_num = max_num + 1
 
-            logger.info(f"Fetched new puzzle from Crosshare: {new_puzzle.name} (#{next_num})")
-            return new_puzzle
+                # Update the puzzle data with the new number
+                capi_data["number"] = next_num
+
+                # Create and save puzzle
+                new_puzzle = Puzzle(
+                    puzzle_number=next_num,
+                    name=capi_data["name"],
+                    data=capi_data,
+                    crosshare_id=ch_id,
+                )
+                db.add(new_puzzle)
+                await db.commit()
+                await db.refresh(new_puzzle)
+
+                logger.info(f"Fetched new puzzle from Crosshare: {new_puzzle.name} (#{next_num}, {len(ch_puzzle.get('clues', []))} clues)")
+                return new_puzzle
 
     except Exception as e:
         logger.error(f"Error fetching puzzle from Crosshare: {e}")

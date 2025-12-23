@@ -3,14 +3,21 @@ import json
 import httpx
 from bs4 import BeautifulSoup
 
+# Clue count filter: 20 < num_clues < 25
+MIN_CLUES = 20
+MAX_CLUES = 25
 
-async def fetch_puzzle_list() -> list[dict]:
-    """Fetch list of newest puzzles from Crosshare.
+
+async def fetch_puzzle_list(page: int = 1) -> list[dict]:
+    """Fetch list of featured puzzles from Crosshare.
+
+    Args:
+        page: Page number for pagination (1-indexed)
 
     Returns list of puzzle metadata dicts with 'id' and other fields.
     """
     async with httpx.AsyncClient() as client:
-        resp = await client.get("https://crosshare.org/newest", timeout=30.0)
+        resp = await client.get(f"https://crosshare.org/featured/{page}", timeout=30.0)
         resp.raise_for_status()
 
         soup = BeautifulSoup(resp.text, "html.parser")
@@ -23,6 +30,18 @@ async def fetch_puzzle_list() -> list[dict]:
         puzzles = data.get("props", {}).get("pageProps", {}).get("puzzles", [])
 
         return puzzles
+
+
+def get_clue_count(puzzle: dict) -> int:
+    """Get the number of clues in a puzzle."""
+    clues = puzzle.get("clues", [])
+    return len(clues)
+
+
+def is_valid_puzzle_size(puzzle: dict) -> bool:
+    """Check if puzzle has valid clue count (20 < clues < 25)."""
+    clue_count = get_clue_count(puzzle)
+    return MIN_CLUES < clue_count < MAX_CLUES
 
 
 async def fetch_puzzle(puzzle_id: str) -> dict:
