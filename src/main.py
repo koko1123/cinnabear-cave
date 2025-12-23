@@ -132,7 +132,7 @@ async def get_next_puzzle(
 async def _fetch_new_puzzle_from_crosshare(db: AsyncSession) -> Puzzle | None:
     """Fetch a new featured puzzle from Crosshare that we don't already have.
 
-    Only fetches puzzles with 20 < clue_count < 25.
+    Only fetches puzzles with 60 < clue_count < 80.
     """
     try:
         # Try multiple pages of featured puzzles
@@ -157,9 +157,9 @@ async def _fetch_new_puzzle_from_crosshare(db: AsyncSession) -> Puzzle | None:
                 # Fetch full puzzle data
                 ch_puzzle = await fetch_puzzle(ch_id)
 
-                # Check clue count filter (20 < clues < 25)
+                # Check clue count filter (60 < clues < 80)
                 if not is_valid_puzzle_size(ch_puzzle):
-                    logger.debug(f"Skipping puzzle {ch_id}: clue count not in range 20-25")
+                    logger.debug(f"Skipping puzzle {ch_id}: clue count not in range 60-80")
                     continue
 
                 # Convert to CAPI format

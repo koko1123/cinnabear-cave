@@ -1,0 +1,1346 @@
+{
+  "id": "YWRbXjzL1VfyoQXdGPkD",
+  "number": 0,
+  "name": "Metal Monday #30 - \"High Voltage\"",
+  "creator": {
+    "name": "The Puzzle Pit",
+    "webUrl": ""
+  },
+  "date": 1766514063458,
+  "webPublicationDate": 1766514063458,
+  "dimensions": {
+    "cols": 15,
+    "rows": 15
+  },
+  "crosswordType": "quick",
+  "solutionAvailable": true,
+  "dateSolutionAvailable": 1766514063458,
+  "entries": [
+    {
+      "id": "1-across",
+      "number": 1,
+      "humanNumber": "1",
+      "clue": "Architects or Descendents",
+      "direction": "across",
+      "length": 4,
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "separatorLocations": {},
+      "solution": "BAND",
+      "group": [
+        "1-across"
+      ]
+    },
+    {
+      "id": "1-down",
+      "number": 1,
+      "humanNumber": "1",
+      "clue": "Music licensing org.",
+      "direction": "down",
+      "length": 3,
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "separatorLocations": {},
+      "solution": "BMI",
+      "group": [
+        "1-down"
+      ]
+    },
+    {
+      "id": "2-down",
+      "number": 2,
+      "humanNumber": "2",
+      "clue": "Key of Toto's \"Africa\" (abbr.)",
+      "direction": "down",
+      "length": 4,
+      "position": {
+        "x": 1,
+        "y": 0
+      },
+      "separatorLocations": {},
+      "solution": "AMAJ",
+      "group": [
+        "2-down"
+      ]
+    },
+    {
+      "id": "3-down",
+      "number": 3,
+      "humanNumber": "3",
+      "clue": "____ Inch Nails",
+      "direction": "down",
+      "length": 4,
+      "position": {
+        "x": 2,
+        "y": 0
+      },
+      "separatorLocations": {},
+      "solution": "NINE",
+      "group": [
+        "3-down"
+      ]
+    },
+    {
+      "id": "4-down",
+      "number": 4,
+      "humanNumber": "4",
+      "clue": "Like the tritone, sometimes known as the \"Devil's Interval\"",
+      "direction": "down",
+      "length": 9,
+      "position": {
+        "x": 3,
+        "y": 0
+      },
+      "separatorLocations": {},
+      "solution": "DISSONANT",
+      "group": [
+        "4-down"
+      ]
+    },
+    {
+      "id": "5-across",
+      "number": 5,
+      "humanNumber": "5",
+      "clue": "Boston Symphony conductor Seiji",
+      "direction": "across",
+      "length": 5,
+      "position": {
+        "x": 5,
+        "y": 0
+      },
+      "separatorLocations": {},
+      "solution": "OZAWA",
+      "group": [
+        "5-across"
+      ]
+    },
+    {
+      "id": "5-down",
+      "number": 5,
+      "humanNumber": "5",
+      "clue": "Actress Elizabeth",
+      "direction": "down",
+      "length": 5,
+      "position": {
+        "x": 5,
+        "y": 0
+      },
+      "separatorLocations": {},
+      "solution": "OLSEN",
+      "group": [
+        "5-down"
+      ]
+    },
+    {
+      "id": "6-down",
+      "number": 6,
+      "humanNumber": "6",
+      "clue": "Passion",
+      "direction": "down",
+      "length": 4,
+      "position": {
+        "x": 6,
+        "y": 0
+      },
+      "separatorLocations": {},
+      "solution": "ZEAL",
+      "group": [
+        "6-down"
+      ]
+    },
+    {
+      "id": "7-down",
+      "number": 7,
+      "humanNumber": "7",
+      "clue": "Flu symptom",
+      "direction": "down",
+      "length": 4,
+      "position": {
+        "x": 7,
+        "y": 0
+      },
+      "separatorLocations": {},
+      "solution": "AGUE",
+      "group": [
+        "7-down"
+      ]
+    },
+    {
+      "id": "8-down",
+      "number": 8,
+      "humanNumber": "8",
+      "clue": "Northwestern athlete",
+      "direction": "down",
+      "length": 6,
+      "position": {
+        "x": 8,
+        "y": 0
+      },
+      "separatorLocations": {},
+      "solution": "WILACAT",
+      "group": [
+        "8-down"
+      ]
+    },
+    {
+      "id": "9-down",
+      "number": 9,
+      "humanNumber": "9",
+      "clue": "In a luxury box, maybe",
+      "direction": "down",
+      "length": 9,
+      "position": {
+        "x": 9,
+        "y": 0
+      },
+      "separatorLocations": {},
+      "solution": "ATTHEGAME",
+      "group": [
+        "9-down"
+      ]
+    },
+    {
+      "id": "10-across",
+      "number": 10,
+      "humanNumber": "10",
+      "clue": "What drummers control",
+      "direction": "across",
+      "length": 4,
+      "position": {
+        "x": 11,
+        "y": 0
+      },
+      "separatorLocations": {},
+      "solution": "BEAT",
+      "group": [
+        "10-across"
+      ]
+    },
+    {
+      "id": "10-down",
+      "number": 10,
+      "humanNumber": "10",
+      "clue": "\"Real Housewives\" network",
+      "direction": "down",
+      "length": 5,
+      "position": {
+        "x": 11,
+        "y": 0
+      },
+      "separatorLocations": {},
+      "solution": "BRAVO",
+      "group": [
+        "10-down"
+      ]
+    },
+    {
+      "id": "11-down",
+      "number": 11,
+      "humanNumber": "11",
+      "clue": "Relieve",
+      "direction": "down",
+      "length": 4,
+      "position": {
+        "x": 12,
+        "y": 0
+      },
+      "separatorLocations": {},
+      "solution": "EASE",
+      "group": [
+        "11-down"
+      ]
+    },
+    {
+      "id": "12-down",
+      "number": 12,
+      "humanNumber": "12",
+      "clue": "\"Come ___, bro!\"",
+      "direction": "down",
+      "length": 4,
+      "position": {
+        "x": 13,
+        "y": 0
+      },
+      "separatorLocations": {},
+      "solution": "ATME",
+      "group": [
+        "12-down"
+      ]
+    },
+    {
+      "id": "13-down",
+      "number": 13,
+      "humanNumber": "13",
+      "clue": "Yukon or Northwest, in Can.",
+      "direction": "down",
+      "length": 4,
+      "position": {
+        "x": 14,
+        "y": 0
+      },
+      "separatorLocations": {},
+      "solution": "TERR",
+      "group": [
+        "13-down"
+      ]
+    },
+    {
+      "id": "14-across",
+      "number": 14,
+      "humanNumber": "14",
+      "clue": "Year that Disturbed's \"Believe\" and Finch's \"What It Is To Burn\" were released, in Roman numerals",
+      "direction": "across",
+      "length": 4,
+      "position": {
+        "x": 0,
+        "y": 1
+      },
+      "separatorLocations": {},
+      "solution": "MMII",
+      "group": [
+        "14-across"
+      ]
+    },
+    {
+      "id": "15-across",
+      "number": 15,
+      "humanNumber": "15",
+      "clue": "\"2 ____ 2 Quit\"",
+      "direction": "across",
+      "length": 5,
+      "position": {
+        "x": 5,
+        "y": 1
+      },
+      "separatorLocations": {},
+      "solution": "LEGIT",
+      "group": [
+        "15-across"
+      ]
+    },
+    {
+      "id": "16-across",
+      "number": 16,
+      "humanNumber": "16",
+      "clue": "Assign stars",
+      "direction": "across",
+      "length": 4,
+      "position": {
+        "x": 11,
+        "y": 1
+      },
+      "separatorLocations": {},
+      "solution": "RATE",
+      "group": [
+        "16-across"
+      ]
+    },
+    {
+      "id": "17-across",
+      "number": 17,
+      "humanNumber": "17",
+      "clue": "Punk singers Curtis and MacKaye",
+      "direction": "across",
+      "length": 4,
+      "position": {
+        "x": 0,
+        "y": 2
+      },
+      "separatorLocations": {},
+      "solution": "IANS",
+      "group": [
+        "17-across"
+      ]
+    },
+    {
+      "id": "18-across",
+      "number": 18,
+      "humanNumber": "18",
+      "clue": "____ Saint Marie, Ontario",
+      "direction": "across",
+      "length": 5,
+      "position": {
+        "x": 5,
+        "y": 2
+      },
+      "separatorLocations": {},
+      "solution": "SAULT",
+      "group": [
+        "18-across"
+      ]
+    },
+    {
+      "id": "19-across",
+      "number": 19,
+      "humanNumber": "19",
+      "clue": "Satisfying video acronym",
+      "direction": "across",
+      "length": 4,
+      "position": {
+        "x": 11,
+        "y": 2
+      },
+      "separatorLocations": {},
+      "solution": "ASMR",
+      "group": [
+        "19-across"
+      ]
+    },
+    {
+      "id": "20-across",
+      "number": 20,
+      "humanNumber": "20",
+      "clue": "Original and current frontman for Killswitch Engage",
+      "direction": "across",
+      "length": 9,
+      "position": {
+        "x": 1,
+        "y": 3
+      },
+      "separatorLocations": {},
+      "solution": "JESSELEACH",
+      "group": [
+        "20-across"
+      ]
+    },
+    {
+      "id": "21-down",
+      "number": 21,
+      "humanNumber": "21",
+      "clue": "Neighbor of Nor.",
+      "direction": "down",
+      "length": 3,
+      "position": {
+        "x": 4,
+        "y": 3
+      },
+      "separatorLocations": {},
+      "solution": "SWE",
+      "group": [
+        "21-down"
+      ]
+    },
+    {
+      "id": "22-across",
+      "number": 22,
+      "humanNumber": "22",
+      "clue": "Change course quickly",
+      "direction": "across",
+      "length": 4,
+      "position": {
+        "x": 11,
+        "y": 3
+      },
+      "separatorLocations": {},
+      "solution": "VEER",
+      "group": [
+        "22-across"
+      ]
+    },
+    {
+      "id": "23-across",
+      "number": 23,
+      "humanNumber": "23",
+      "clue": "\"My ____ Worst Enemy\" (90s one-hit wonder)",
+      "direction": "across",
+      "length": 3,
+      "position": {
+        "x": 3,
+        "y": 4
+      },
+      "separatorLocations": {},
+      "solution": "OWN",
+      "group": [
+        "23-across"
+      ]
+    },
+    {
+      "id": "24-across",
+      "number": 24,
+      "humanNumber": "24",
+      "clue": "Smith predecessor?",
+      "direction": "across",
+      "length": 4,
+      "position": {
+        "x": 8,
+        "y": 4
+      },
+      "separatorLocations": {},
+      "solution": "AERO",
+      "group": [
+        "24-across"
+      ]
+    },
+    {
+      "id": "25-down",
+      "number": 25,
+      "humanNumber": "25",
+      "clue": "NFL commentator Tony",
+      "direction": "down",
+      "length": 4,
+      "position": {
+        "x": 10,
+        "y": 4
+      },
+      "separatorLocations": {},
+      "solution": "ROMO",
+      "group": [
+        "25-down"
+      ]
+    },
+    {
+      "id": "26-across",
+      "number": 26,
+      "humanNumber": "26",
+      "clue": "Courage",
+      "direction": "across",
+      "length": 5,
+      "position": {
+        "x": 0,
+        "y": 5
+      },
+      "separatorLocations": {},
+      "solution": "SPINE",
+      "group": [
+        "26-across"
+      ]
+    },
+    {
+      "id": "26-down",
+      "number": 26,
+      "humanNumber": "26",
+      "clue": "One of two Bolivian capitals",
+      "direction": "down",
+      "length": 5,
+      "position": {
+        "x": 0,
+        "y": 5
+      },
+      "separatorLocations": {},
+      "solution": "SUCRE",
+      "group": [
+        "26-down"
+      ]
+    },
+    {
+      "id": "27-down",
+      "number": 27,
+      "humanNumber": "27",
+      "clue": "\"Nonsense!\", in old timey speak",
+      "direction": "down",
+      "length": 5,
+      "position": {
+        "x": 1,
+        "y": 5
+      },
+      "separatorLocations": {},
+      "solution": "PSHAW",
+      "group": [
+        "27-down"
+      ]
+    },
+    {
+      "id": "28-down",
+      "number": 28,
+      "humanNumber": "28",
+      "clue": "\"____ The Misery\" (Halestorm track)",
+      "direction": "down",
+      "length": 5,
+      "position": {
+        "x": 2,
+        "y": 5
+      },
+      "separatorLocations": {},
+      "solution": "IMISS",
+      "group": [
+        "28-down"
+      ]
+    },
+    {
+      "id": "29-across",
+      "number": 29,
+      "humanNumber": "29",
+      "clue": "Company with a famous sign in Boston",
+      "direction": "across",
+      "length": 5,
+      "position": {
+        "x": 6,
+        "y": 5
+      },
+      "separatorLocations": {},
+      "solution": "CITGO",
+      "group": [
+        "29-across"
+      ]
+    },
+    {
+      "id": "29-down",
+      "number": 29,
+      "humanNumber": "29",
+      "clue": "Iowa liberal arts college",
+      "direction": "down",
+      "length": 3,
+      "position": {
+        "x": 6,
+        "y": 5
+      },
+      "separatorLocations": {},
+      "solution": "COE",
+      "group": [
+        "29-down"
+      ]
+    },
+    {
+      "id": "30-down",
+      "number": 30,
+      "humanNumber": "30",
+      "clue": "Karachi river",
+      "direction": "down",
+      "length": 5,
+      "position": {
+        "x": 7,
+        "y": 5
+      },
+      "separatorLocations": {},
+      "solution": "INDUS",
+      "group": [
+        "30-down"
+      ]
+    },
+    {
+      "id": "31-across",
+      "number": 31,
+      "humanNumber": "31",
+      "clue": "Leaders of Canada and the UK",
+      "direction": "across",
+      "length": 3,
+      "position": {
+        "x": 12,
+        "y": 5
+      },
+      "separatorLocations": {},
+      "solution": "PMS",
+      "group": [
+        "31-across"
+      ]
+    },
+    {
+      "id": "31-down",
+      "number": 31,
+      "humanNumber": "31",
+      "clue": "One prepping a press release, shortly",
+      "direction": "down",
+      "length": 5,
+      "position": {
+        "x": 12,
+        "y": 5
+      },
+      "separatorLocations": {},
+      "solution": "PRREP",
+      "group": [
+        "31-down"
+      ]
+    },
+    {
+      "id": "32-down",
+      "number": 32,
+      "humanNumber": "32",
+      "clue": "Eccentric",
+      "direction": "down",
+      "length": 5,
+      "position": {
+        "x": 13,
+        "y": 5
+      },
+      "separatorLocations": {},
+      "solution": "MAACAP",
+      "group": [
+        "32-down"
+      ]
+    },
+    {
+      "id": "33-down",
+      "number": 33,
+      "humanNumber": "33",
+      "clue": "In a crafty way",
+      "direction": "down",
+      "length": 5,
+      "position": {
+        "x": 14,
+        "y": 5
+      },
+      "separatorLocations": {},
+      "solution": "SLYLY",
+      "group": [
+        "33-down"
+      ]
+    },
+    {
+      "id": "34-across",
+      "number": 34,
+      "humanNumber": "34",
+      "clue": "West Point sch.",
+      "direction": "across",
+      "length": 4,
+      "position": {
+        "x": 0,
+        "y": 6
+      },
+      "separatorLocations": {},
+      "solution": "USMA",
+      "group": [
+        "34-across"
+      ]
+    },
+    {
+      "id": "35-across",
+      "number": 35,
+      "humanNumber": "35",
+      "clue": "Insurance company with a namesake tower in Chicago",
+      "direction": "across",
+      "length": 3,
+      "position": {
+        "x": 5,
+        "y": 6
+      },
+      "separatorLocations": {},
+      "solution": "AON",
+      "group": [
+        "35-across"
+      ]
+    },
+    {
+      "id": "35-down",
+      "number": 35,
+      "humanNumber": "35",
+      "clue": "Puts together Ikea furniture",
+      "direction": "down",
+      "length": 9,
+      "position": {
+        "x": 5,
+        "y": 6
+      },
+      "separatorLocations": {},
+      "solution": "ASSEMBLES",
+      "group": [
+        "35-down"
+      ]
+    },
+    {
+      "id": "36-across",
+      "number": 36,
+      "humanNumber": "36",
+      "clue": "Lacking principles",
+      "direction": "across",
+      "length": 6,
+      "position": {
+        "x": 9,
+        "y": 6
+      },
+      "separatorLocations": {},
+      "solution": "AMORAL",
+      "group": [
+        "36-across"
+      ]
+    },
+    {
+      "id": "37-down",
+      "number": 37,
+      "humanNumber": "37",
+      "clue": "Extremely rare births (in humans)",
+      "direction": "down",
+      "length": 9,
+      "position": {
+        "x": 11,
+        "y": 6
+      },
+      "separatorLocations": {},
+      "solution": "OCTUPLETS",
+      "group": [
+        "37-down"
+      ]
+    },
+    {
+      "id": "38-across",
+      "number": 38,
+      "humanNumber": "38",
+      "clue": "2008 album that was \"The most anticipated release of all time\" and was met with mainly poor reviews",
+      "direction": "across",
+      "length": 15,
+      "position": {
+        "x": 0,
+        "y": 7
+      },
+      "separatorLocations": {},
+      "solution": "CHINESEDEMOCRACY",
+      "group": [
+        "38-across"
+      ]
+    },
+    {
+      "id": "39-down",
+      "number": 39,
+      "humanNumber": "39",
+      "clue": "\"____ Peach\" (Allman Brothers album)",
+      "direction": "down",
+      "length": 4,
+      "position": {
+        "x": 4,
+        "y": 7
+      },
+      "separatorLocations": {},
+      "solution": "EATA",
+      "group": [
+        "39-down"
+      ]
+    },
+    {
+      "id": "40-down",
+      "number": 40,
+      "humanNumber": "40",
+      "clue": "___ out (just manage)",
+      "direction": "down",
+      "length": 3,
+      "position": {
+        "x": 8,
+        "y": 7
+      },
+      "separatorLocations": {},
+      "solution": "EKE",
+      "group": [
+        "40-down"
+      ]
+    },
+    {
+      "id": "41-across",
+      "number": 41,
+      "humanNumber": "41",
+      "clue": "Stereotypical reggae fans",
+      "direction": "across",
+      "length": 6,
+      "position": {
+        "x": 0,
+        "y": 8
+      },
+      "separatorLocations": {},
+      "solution": "RASTAS",
+      "group": [
+        "41-across"
+      ]
+    },
+    {
+      "id": "42-across",
+      "number": 42,
+      "humanNumber": "42",
+      "clue": "Instrument rarely heard in metal music",
+      "direction": "across",
+      "length": 3,
+      "position": {
+        "x": 7,
+        "y": 8
+      },
+      "separatorLocations": {},
+      "solution": "UKE",
+      "group": [
+        "42-across"
+      ]
+    },
+    {
+      "id": "43-across",
+      "number": 43,
+      "humanNumber": "43",
+      "clue": "Color on a Charlotte Hornets uniform",
+      "direction": "across",
+      "length": 4,
+      "position": {
+        "x": 11,
+        "y": 8
+      },
+      "separatorLocations": {},
+      "solution": "TEAL",
+      "group": [
+        "43-across"
+      ]
+    },
+    {
+      "id": "44-across",
+      "number": 44,
+      "humanNumber": "44",
+      "clue": "Sounds of disgust",
+      "direction": "across",
+      "length": 3,
+      "position": {
+        "x": 0,
+        "y": 9
+      },
+      "separatorLocations": {},
+      "solution": "EWS",
+      "group": [
+        "44-across"
+      ]
+    },
+    {
+      "id": "45-across",
+      "number": 45,
+      "humanNumber": "45",
+      "clue": "Like all the songs on the punk rock compilation \"Short Music For Short People\"",
+      "direction": "across",
+      "length": 5,
+      "position": {
+        "x": 4,
+        "y": 9
+      },
+      "separatorLocations": {},
+      "solution": "TERSE",
+      "group": [
+        "45-across"
+      ]
+    },
+    {
+      "id": "46-down",
+      "number": 46,
+      "humanNumber": "46",
+      "clue": "American adversary in the Revolutionary War",
+      "direction": "down",
+      "length": 6,
+      "position": {
+        "x": 6,
+        "y": 9
+      },
+      "separatorLocations": {},
+      "solution": "REACOAT",
+      "group": [
+        "46-down"
+      ]
+    },
+    {
+      "id": "47-across",
+      "number": 47,
+      "humanNumber": "47",
+      "clue": "Small fish",
+      "direction": "across",
+      "length": 5,
+      "position": {
+        "x": 10,
+        "y": 9
+      },
+      "separatorLocations": {},
+      "solution": "GUPPY",
+      "group": [
+        "47-across"
+      ]
+    },
+    {
+      "id": "47-down",
+      "number": 47,
+      "humanNumber": "47",
+      "clue": "Canadian punks who had songs in the NHL and Madden franchises in the early 2000s",
+      "direction": "down",
+      "length": 3,
+      "position": {
+        "x": 10,
+        "y": 9
+      },
+      "separatorLocations": {},
+      "solution": "GOB",
+      "group": [
+        "47-down"
+      ]
+    },
+    {
+      "id": "48-across",
+      "number": 48,
+      "humanNumber": "48",
+      "clue": "Like most huge dogs, ironically",
+      "direction": "across",
+      "length": 4,
+      "position": {
+        "x": 3,
+        "y": 10
+      },
+      "separatorLocations": {},
+      "solution": "TAME",
+      "group": [
+        "48-across"
+      ]
+    },
+    {
+      "id": "48-down",
+      "number": 48,
+      "humanNumber": "48",
+      "clue": "Alternative group with the hit \"If You Can Only See\"",
+      "direction": "down",
+      "length": 5,
+      "position": {
+        "x": 3,
+        "y": 10
+      },
+      "separatorLocations": {},
+      "solution": "TONIC",
+      "group": [
+        "48-down"
+      ]
+    },
+    {
+      "id": "49-across",
+      "number": 49,
+      "humanNumber": "49",
+      "clue": "Alley ___",
+      "direction": "across",
+      "length": 3,
+      "position": {
+        "x": 9,
+        "y": 10
+      },
+      "separatorLocations": {},
+      "solution": "OOP",
+      "group": [
+        "49-across"
+      ]
+    },
+    {
+      "id": "49-down",
+      "number": 49,
+      "humanNumber": "49",
+      "clue": "Inception",
+      "direction": "down",
+      "length": 5,
+      "position": {
+        "x": 9,
+        "y": 10
+      },
+      "separatorLocations": {},
+      "solution": "ONSET",
+      "group": [
+        "49-down"
+      ]
+    },
+    {
+      "id": "50-across",
+      "number": 50,
+      "humanNumber": "50",
+      "clue": "Neighborhood in both NYC and London",
+      "direction": "across",
+      "length": 4,
+      "position": {
+        "x": 0,
+        "y": 11
+      },
+      "separatorLocations": {},
+      "solution": "SOHO",
+      "group": [
+        "50-across"
+      ]
+    },
+    {
+      "id": "50-down",
+      "number": 50,
+      "humanNumber": "50",
+      "clue": "\"Pork ____\" (Primus record)",
+      "direction": "down",
+      "length": 4,
+      "position": {
+        "x": 0,
+        "y": 11
+      },
+      "separatorLocations": {},
+      "solution": "SODA",
+      "group": [
+        "50-down"
+      ]
+    },
+    {
+      "id": "51-down",
+      "number": 51,
+      "humanNumber": "51",
+      "clue": "Oil cartel",
+      "direction": "down",
+      "length": 4,
+      "position": {
+        "x": 1,
+        "y": 11
+      },
+      "separatorLocations": {},
+      "solution": "OPEC",
+      "group": [
+        "51-down"
+      ]
+    },
+    {
+      "id": "52-down",
+      "number": 52,
+      "humanNumber": "52",
+      "clue": "Gripped",
+      "direction": "down",
+      "length": 4,
+      "position": {
+        "x": 2,
+        "y": 11
+      },
+      "separatorLocations": {},
+      "solution": "HELD",
+      "group": [
+        "52-down"
+      ]
+    },
+    {
+      "id": "53-across",
+      "number": 53,
+      "humanNumber": "53",
+      "clue": "27x Platinum-selling rock record",
+      "direction": "across",
+      "length": 9,
+      "position": {
+        "x": 5,
+        "y": 11
+      },
+      "separatorLocations": {},
+      "solution": "BACKINBLACK",
+      "group": [
+        "53-across"
+      ]
+    },
+    {
+      "id": "54-down",
+      "number": 54,
+      "humanNumber": "54",
+      "clue": "NBA coach Steve",
+      "direction": "down",
+      "length": 4,
+      "position": {
+        "x": 7,
+        "y": 11
+      },
+      "separatorLocations": {},
+      "solution": "KERR",
+      "group": [
+        "54-down"
+      ]
+    },
+    {
+      "id": "55-down",
+      "number": 55,
+      "humanNumber": "55",
+      "clue": "Cuba o Puerto Rico",
+      "direction": "down",
+      "length": 4,
+      "position": {
+        "x": 8,
+        "y": 11
+      },
+      "separatorLocations": {},
+      "solution": "ISLA",
+      "group": [
+        "55-down"
+      ]
+    },
+    {
+      "id": "56-down",
+      "number": 56,
+      "humanNumber": "56",
+      "clue": "Aircraft known for its 3-engine layout",
+      "direction": "down",
+      "length": 4,
+      "position": {
+        "x": 12,
+        "y": 11
+      },
+      "separatorLocations": {},
+      "solution": "ACTEN",
+      "group": [
+        "56-down"
+      ]
+    },
+    {
+      "id": "57-down",
+      "number": 57,
+      "humanNumber": "57",
+      "clue": "\"_____ Deep\" (Job For A Cowboy track)",
+      "direction": "down",
+      "length": 4,
+      "position": {
+        "x": 13,
+        "y": 11
+      },
+      "separatorLocations": {},
+      "solution": "KNEE",
+      "group": [
+        "57-down"
+      ]
+    },
+    {
+      "id": "58-across",
+      "number": 58,
+      "humanNumber": "58",
+      "clue": "\"With Arms Wide ____\" (Creed ballad)",
+      "direction": "across",
+      "length": 4,
+      "position": {
+        "x": 0,
+        "y": 12
+      },
+      "separatorLocations": {},
+      "solution": "OPEN",
+      "group": [
+        "58-across"
+      ]
+    },
+    {
+      "id": "59-across",
+      "number": 59,
+      "humanNumber": "59",
+      "clue": "Windblown soil",
+      "direction": "across",
+      "length": 5,
+      "position": {
+        "x": 5,
+        "y": 12
+      },
+      "separatorLocations": {},
+      "solution": "LOESS",
+      "group": [
+        "59-across"
+      ]
+    },
+    {
+      "id": "60-across",
+      "number": 60,
+      "humanNumber": "60",
+      "clue": "Sicilian peak",
+      "direction": "across",
+      "length": 4,
+      "position": {
+        "x": 11,
+        "y": 12
+      },
+      "separatorLocations": {},
+      "solution": "ETNA",
+      "group": [
+        "60-across"
+      ]
+    },
+    {
+      "id": "61-down",
+      "number": 61,
+      "humanNumber": "61",
+      "clue": "These are removed with Spotify Premium",
+      "direction": "down",
+      "length": 3,
+      "position": {
+        "x": 14,
+        "y": 12
+      },
+      "separatorLocations": {},
+      "solution": "ADS",
+      "group": [
+        "61-down"
+      ]
+    },
+    {
+      "id": "62-across",
+      "number": 62,
+      "humanNumber": "62",
+      "clue": "Where to get chopped liver and knish",
+      "direction": "across",
+      "length": 4,
+      "position": {
+        "x": 0,
+        "y": 13
+      },
+      "separatorLocations": {},
+      "solution": "DELI",
+      "group": [
+        "62-across"
+      ]
+    },
+    {
+      "id": "63-across",
+      "number": 63,
+      "humanNumber": "63",
+      "clue": "TikTok star Alix",
+      "direction": "across",
+      "length": 5,
+      "position": {
+        "x": 5,
+        "y": 13
+      },
+      "separatorLocations": {},
+      "solution": "EARLE",
+      "group": [
+        "63-across"
+      ]
+    },
+    {
+      "id": "64-across",
+      "number": 64,
+      "humanNumber": "64",
+      "clue": "Word before \"up\" or \"off\"",
+      "direction": "across",
+      "length": 4,
+      "position": {
+        "x": 11,
+        "y": 13
+      },
+      "separatorLocations": {},
+      "solution": "TEED",
+      "group": [
+        "64-across"
+      ]
+    },
+    {
+      "id": "65-across",
+      "number": 65,
+      "humanNumber": "65",
+      "clue": "53-Across group, or a hint on how to complete four boxes in this puzzle",
+      "direction": "across",
+      "length": 4,
+      "position": {
+        "x": 0,
+        "y": 14
+      },
+      "separatorLocations": {},
+      "solution": "ACDC",
+      "group": [
+        "65-across"
+      ]
+    },
+    {
+      "id": "66-across",
+      "number": 66,
+      "humanNumber": "66",
+      "clue": "Instrument for Iron Maiden's Dave Murray, for short",
+      "direction": "across",
+      "length": 5,
+      "position": {
+        "x": 5,
+        "y": 14
+      },
+      "separatorLocations": {},
+      "solution": "STRAT",
+      "group": [
+        "66-across"
+      ]
+    },
+    {
+      "id": "67-across",
+      "number": 67,
+      "humanNumber": "67",
+      "clue": "Console that came bundled with Super Mario World (init.)",
+      "direction": "across",
+      "length": 4,
+      "position": {
+        "x": 11,
+        "y": 14
+      },
+      "separatorLocations": {},
+      "solution": "SNES",
+      "group": [
+        "67-across"
+      ]
+    }
+  ]
+}
