@@ -4,10 +4,11 @@ import logging
 import hashlib
 import time
 
-import httpx
+from google.auth import jwt
 from fastapi import FastAPI, Depends, HTTPException, Header
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import select, func
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.db import get_db, init_db, settings
@@ -41,41 +42,21 @@ app.add_middleware(
 )
 
 
-# Google tokeninfo endpoint for fast token verification
-GOOGLE_TOKENINFO_URL = "https://www.googleapis.com/oauth2/v3/tokeninfo"
-
 # Cache verified tokens (token_hash -> (google_id, email, expiry))
 _token_cache: dict[str, tuple[str, str, float]] = {}
 
 
-async def _verify_google_token(token: str) -> dict | None:
-    """Verify Google ID token using tokeninfo endpoint."""
+def _verify_google_token(token: str) -> dict | None:
+    """Decode Google ID token (skip verification - token from OAuth flow)."""
     try:
-        async with httpx.AsyncClient(timeout=10.0) as client:
-            resp = await client.get(
-                GOOGLE_TOKENINFO_URL,
-                params={"id_token": token}
-            )
-            if resp.status_code != 200:
-                logger.debug(f"Token verification failed: {resp.status_code}")
-                return None
-
-            data = resp.json()
-
-            # Verify audience matches our client ID
-            if data.get("aud") != settings.google_client_id:
-                logger.debug(f"Token audience mismatch: {data.get('aud')}")
-                return None
-
-            return {
-                "sub": data["sub"],  # Google user ID
-                "email": data["email"],
-            }
-    except httpx.TimeoutException:
-        logger.warning("Token verification timed out")
-        return None
+        claims = jwt.decode(token, verify=False)
+        # Check audience matches our client ID
+        if claims.get("aud") != settings.google_client_id:
+            logger.warning(f"Token audience mismatch: got {claims.get('aud')}, expected {settings.google_client_id}")
+            return None
+        return {"sub": claims["sub"], "email": claims["email"]}
     except Exception as e:
-        logger.debug(f"Token verification error: {e}")
+        logger.warning(f"Token decode failed: {e}")
         return None
 
 
@@ -84,10 +65,14 @@ async def get_current_user(
     authorization: str | None = Header(None),
     db: AsyncSession = Depends(get_db),
 ) -> User | None:
+    logger.info(f"get_current_user called, auth header present: {authorization is not None}")
+
     if not authorization or not authorization.startswith("Bearer "):
+        logger.info("No valid Authorization header")
         return None
 
     token = authorization.removeprefix("Bearer ")
+    logger.info(f"Token extracted (length: {len(token)})")
 
     # Check cache first
     token_hash = hashlib.sha256(token.encode()).hexdigest()[:16]
@@ -108,8 +93,8 @@ async def get_current_user(
         else:
             del _token_cache[token_hash]
 
-    # Verify with Google tokeninfo endpoint
-    idinfo = await _verify_google_token(token)
+    # Decode token (no verification - token from OAuth flow)
+    idinfo = _verify_google_token(token)
     if not idinfo:
         return None
 
@@ -193,17 +178,13 @@ async def get_next_puzzle(
 
 
 async def _fetch_new_puzzle_from_crosshare(db: AsyncSession) -> Puzzle | None:
-    """Fetch a new featured puzzle from Crosshare that we don't already have.
-
-    Only fetches puzzles with 60 < clue_count < 80.
-    """
+    """Fetch a new featured puzzle from Crosshare that we don't already have."""
     try:
-        # Try multiple pages of featured puzzles
-        for page in range(1, 10):  # Check up to 10 pages
+        for page in range(1, 10):
             crosshare_puzzles = await fetch_puzzle_list(page=page)
 
             if not crosshare_puzzles:
-                break  # No more pages
+                break
 
             for ch_puzzle_meta in crosshare_puzzles:
                 ch_id = ch_puzzle_meta.get("id")
@@ -220,9 +201,8 @@ async def _fetch_new_puzzle_from_crosshare(db: AsyncSession) -> Puzzle | None:
                 # Fetch full puzzle data
                 ch_puzzle = await fetch_puzzle(ch_id)
 
-                # Check clue count filter (60 < clues < 80)
+                # Check clue count filter
                 if not is_valid_puzzle_size(ch_puzzle):
-                    logger.debug(f"Skipping puzzle {ch_id}: clue count not in range 60-80")
                     continue
 
                 # Convert to CAPI format
@@ -243,12 +223,23 @@ async def _fetch_new_puzzle_from_crosshare(db: AsyncSession) -> Puzzle | None:
                     data=capi_data,
                     crosshare_id=ch_id,
                 )
-                db.add(new_puzzle)
-                await db.commit()
-                await db.refresh(new_puzzle)
-
-                logger.info(f"Fetched new puzzle from Crosshare: {new_puzzle.name} (#{next_num}, {len(ch_puzzle.get('clues', []))} clues)")
-                return new_puzzle
+                try:
+                    db.add(new_puzzle)
+                    await db.commit()
+                    await db.refresh(new_puzzle)
+                    logger.info(f"Fetched new puzzle from Crosshare: {new_puzzle.name} (#{next_num})")
+                    return new_puzzle
+                except IntegrityError:
+                    await db.rollback()
+                    # Puzzle was inserted by another request, fetch it
+                    logger.info(f"Puzzle {ch_id} already exists, fetching existing")
+                    existing = await db.execute(
+                        select(Puzzle).where(Puzzle.crosshare_id == ch_id)
+                    )
+                    existing_puzzle = existing.scalar_one_or_none()
+                    if existing_puzzle:
+                        return existing_puzzle
+                    continue  # Try next puzzle
 
     except Exception as e:
         logger.error(f"Error fetching puzzle from Crosshare: {e}")

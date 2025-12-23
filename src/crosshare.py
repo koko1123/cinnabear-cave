@@ -3,9 +3,9 @@ import json
 import httpx
 from bs4 import BeautifulSoup
 
-# Clue count filter: 60 < num_clues < 80
-MIN_CLUES = 60
-MAX_CLUES = 80
+# Clue count filter: 40 < num_clues < 100
+MIN_CLUES = 40
+MAX_CLUES = 100
 
 
 async def fetch_puzzle_list(page: int = 1) -> list[dict]:
